@@ -1,815 +1,858 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agensia × Moosbild – Projekt-Briefing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #111714;
-    --surface: #1a2119;
-    --surface2: #222e22;
-    --border: #2d3d2d;
-    --moss: #4a7c52;
-    --moss-light: #5e9e68;
-    --moss-pale: #8fba8f;
-    --cream: #f0ebe0;
-    --sand: #c8a878;
-    --terracotta: #c07848;
-    --text: #e8f0e8;
-    --text-muted: #8aaa8a;
-    --text-subtle: #5a7a5a;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agensia × Projekt Briefing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #111714;
+      --surface: #1a2119;
+      --surface2: #222e22;
+      --border: #2d3d2d;
+      --moss: #4a7c52;
+      --moss-light: #5e9e68;
+      --moss-pale: #8fba8f;
+      --cream: #f0ebe0;
+      --sand: #c8a878;
+      --terracotta: #c07848;
+      --text: #e8f0e8;
+      --text-muted: #8aaa8a;
+      --text-subtle: #5a7a5a;
+    }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
+    /* ── Progress Bar ── */
+    .progress-bar-track {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--surface2);
+      z-index: 100;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--moss), var(--moss-light));
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  /* HEADER */
-  header {
-    position: relative;
-    background: linear-gradient(160deg, #1e3022 0%, #111714 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 60px 40px 80px;
-    overflow: hidden;
-  }
+    /* ── Header ── */
+    .header {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(74,124,82,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(74,124,82,0.08) 0%, transparent 50%),
+        var(--bg);
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(74,124,82,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .header-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--moss-pale);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(38px, 6vw, 58px);
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .header h1 em {
+      font-style: italic;
+      color: var(--moss-pale);
+    }
+    .header p {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
 
-  header::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 450px; height: 450px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,124,82,0.2) 0%, transparent 70%);
-  }
+    /* ── Main Container ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
 
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 5%;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(192,120,72,0.08) 0%, transparent 70%);
-  }
+    /* ── Step ── */
+    .step {
+      display: none;
+      animation: fadeSlide 0.4s ease both;
+    }
+    .step.active {
+      display: block;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  .header-inner {
-    max-width: 720px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
+    .step-tag {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .step h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 5vw, 40px);
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .step h2 em {
+      font-style: italic;
+      color: var(--moss-pale);
+    }
+    .step-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
 
-  .brand-tag {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--moss-pale);
-    margin-bottom: 24px;
-  }
+    /* ── Form Fields ── */
+    .field-group {
+      margin-bottom: 24px;
+    }
+    .field-group label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--moss-pale);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .field-group input,
+    .field-group textarea,
+    .field-group select {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder {
+      color: var(--text-subtle);
+    }
+    .field-group input:focus,
+    .field-group textarea:focus,
+    .field-group select:focus {
+      border-color: var(--moss);
+      box-shadow: 0 0 0 3px rgba(74,124,82,0.15);
+    }
+    .field-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .field-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238aaa8a' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    .field-group select option {
+      background: var(--surface);
+      color: var(--text);
+    }
 
-  header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(38px, 6vw, 58px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: #ffffff;
-    margin-bottom: 20px;
-  }
+    /* ── Chips ── */
+    .chips-label {
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--moss-pale);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .chip {
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .chip:hover {
+      border-color: var(--moss);
+      color: var(--text);
+    }
+    .chip.selected {
+      background: var(--moss);
+      border-color: var(--moss);
+      color: #fff;
+    }
 
-  header h1 em {
-    font-style: italic;
-    color: var(--moss-pale);
-  }
+    /* ── Style Cards ── */
+    .style-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .style-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .style-card:hover {
+      border-color: var(--moss);
+    }
+    .style-card.selected {
+      border-color: var(--moss-light);
+      box-shadow: 0 0 0 2px rgba(74,124,82,0.2);
+    }
+    .style-card .swatches {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .style-card .swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .style-card h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .style-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
 
-  header p {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 500px;
-  }
+    /* ── Recommendation Box ── */
+    .rec-box {
+      background: linear-gradient(135deg, rgba(74,124,82,0.1), rgba(74,124,82,0.05));
+      border: 1px solid rgba(74,124,82,0.2);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--moss-pale);
+      line-height: 1.6;
+    }
+    .rec-box::before {
+      content: '💡';
+      margin-right: 8px;
+    }
 
-  .botanical {
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 280px;
-    opacity: 0.08;
-    pointer-events: none;
-    z-index: 0;
-  }
+    /* ── Navigation ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-progress {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+    .btn {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+    .btn-primary {
+      background: var(--moss);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--moss-light);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--moss);
+      color: var(--text);
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--moss), var(--moss-light));
+      color: #fff;
+      padding: 14px 36px;
+      font-size: 15px;
+    }
+    .btn-submit:hover {
+      box-shadow: 0 4px 20px rgba(74,124,82,0.3);
+    }
 
-  /* PROGRESS */
-  .progress-bar {
-    height: 2px;
-    background: var(--surface2);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+    /* ── Success Screen ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 80px 24px;
+      animation: fadeSlide 0.4s ease both;
+    }
+    .success-screen.active {
+      display: block;
+    }
+    .success-screen h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(32px, 5vw, 46px);
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .success-screen p {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .success-screen .signature {
+      font-size: 13px;
+      color: var(--text-subtle);
+      font-style: italic;
+    }
 
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--moss), var(--terracotta));
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
-  }
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
 
-  /* MAIN */
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 24px 100px;
-    position: relative;
-    z-index: 1;
-  }
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .header { padding: 60px 20px 40px; }
+      .container { padding: 40px 20px 60px; }
+      .style-cards { grid-template-columns: repeat(2, 1fr); }
+      .nav { flex-wrap: wrap; gap: 12px; }
+    }
 
-  /* STEPS */
-  .step { display: none; animation: fadeSlide 0.4s ease forwards; }
-  .step.active { display: block; }
-
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .step-number {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--moss-pale);
-    margin-bottom: 8px;
-  }
-
-  .step-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 5vw, 40px);
-    font-weight: 400;
-    line-height: 1.15;
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
-
-  .step-subtitle {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 48px;
-  }
-
-  /* FIELD */
-  .field { margin-bottom: 36px; }
-
-  label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-
-  label span {
-    font-weight: 300;
-    color: var(--text-subtle);
-    margin-left: 6px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 4px;
-    background: var(--surface);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--text);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-
-  ::placeholder {
-    color: var(--text-subtle);
-    opacity: 1;
-  }
-
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--moss);
-    box-shadow: 0 0 0 3px rgba(74,124,82,0.15);
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-    line-height: 1.6;
-  }
-
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238fba8f' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 44px;
-    cursor: pointer;
-  }
-
-  select option {
-    background: var(--surface2);
-    color: var(--text);
-  }
-
-  /* CHIPS */
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-
-  .chip { cursor: pointer; user-select: none; }
-  .chip input { display: none; }
-
-  .chip-label {
-    display: inline-block;
-    padding: 10px 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--text-muted);
-    background: var(--surface);
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .chip input:checked + .chip-label {
-    background: var(--moss);
-    border-color: var(--moss);
-    color: #ffffff;
-  }
-
-  .chip-label:hover {
-    border-color: var(--moss-pale);
-    color: var(--text);
-  }
-
-  /* STYLE CARDS */
-  .style-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-  }
-
-  .style-card { cursor: pointer; user-select: none; }
-  .style-card input { display: none; }
-
-  .style-card-inner {
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.2s;
-    background: var(--surface);
-  }
-
-  .style-card input:checked + .style-card-inner {
-    border-color: var(--moss);
-    box-shadow: 0 0 0 3px rgba(74,124,82,0.2);
-  }
-
-  .style-swatch { height: 80px; }
-
-  .style-swatch.earthy { background: linear-gradient(135deg, #c8a878 0%, #c07848 40%, #2e4a33 100%); }
-  .style-swatch.editorial { background: linear-gradient(135deg, #4a5a4a 0%, #2e3e2e 50%, #111714 100%); }
-  .style-swatch.botanical { background: linear-gradient(135deg, #4a7c52 0%, #2e5035 50%, #8fba8f 100%); }
-  .style-swatch.modern { background: linear-gradient(135deg, #f0ebe0 0%, #c8a878 40%, #2e4a33 80%, #111714 100%); }
-
-  .style-card-text { padding: 14px 16px; }
-
-  .style-card-text strong {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-
-  .style-card-text small {
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.4;
-    display: block;
-  }
-
-  /* HINT BOX */
-  .hint-box {
-    background: rgba(74,124,82,0.1);
-    border-left: 3px solid var(--moss);
-    border-radius: 0 4px 4px 0;
-    padding: 14px 18px;
-    margin-bottom: 36px;
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .hint-box strong {
-    color: var(--moss-pale);
-    display: block;
-    margin-bottom: 4px;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* NAV */
-  .form-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 56px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 14px 32px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  .btn-primary {
-    background: var(--moss);
-    color: #ffffff;
-  }
-
-  .btn-primary:hover {
-    background: var(--moss-light);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(74,124,82,0.35);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-muted);
-    padding-left: 0;
-  }
-
-  .btn-secondary:hover { color: var(--text); }
-
-  .step-indicator {
-    font-size: 12px;
-    color: var(--text-subtle);
-    font-weight: 300;
-    letter-spacing: 0.05em;
-  }
-
-  /* SUCCESS */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 80px 20px;
-    animation: fadeSlide 0.5s ease forwards;
-  }
-
-  .success-icon {
-    width: 72px;
-    height: 72px;
-    background: var(--moss);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 32px;
-  }
-
-  .success-screen h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
-    font-weight: 300;
-    color: #ffffff;
-    margin-bottom: 16px;
-  }
-
-  .success-screen p {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-subtle);
-    border-top: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (max-width: 540px) {
-    header { padding: 40px 24px 60px; }
-    .style-cards { grid-template-columns: 1fr 1fr; }
-    .btn-primary { padding: 14px 24px; }
-  }
-</style>
+    /* ── Status Messages ── */
+    .form-status {
+      text-align: center;
+      padding: 12px;
+      border-radius: 4px;
+      margin-top: 16px;
+      font-size: 13px;
+      display: none;
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(192, 120, 72, 0.15);
+      border: 1px solid rgba(192, 120, 72, 0.3);
+      color: var(--terracotta);
+    }
+    .form-status.sending {
+      display: block;
+      background: rgba(74, 124, 82, 0.1);
+      border: 1px solid rgba(74, 124, 82, 0.2);
+      color: var(--moss-pale);
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <!-- Botanical SVG decoration -->
-  <svg class="botanical" viewBox="0 0 280 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="200" cy="120" rx="80" ry="120" transform="rotate(-20 200 120)" fill="white"/>
-    <ellipse cx="160" cy="200" rx="60" ry="100" transform="rotate(15 160 200)" fill="white"/>
-    <ellipse cx="220" cy="300" rx="90" ry="130" transform="rotate(-10 220 300)" fill="white"/>
-    <ellipse cx="150" cy="380" rx="55" ry="90" transform="rotate(25 150 380)" fill="white"/>
-    <ellipse cx="210" cy="480" rx="70" ry="110" transform="rotate(-15 210 480)" fill="white"/>
-    <path d="M190 80 Q200 300 180 580" stroke="white" stroke-width="2" fill="none"/>
-    <path d="M180 150 Q140 170 130 200" stroke="white" stroke-width="1.5" fill="none"/>
-    <path d="M185 250 Q230 240 250 270" stroke="white" stroke-width="1.5" fill="none"/>
-    <path d="M182 360 Q145 350 135 375" stroke="white" stroke-width="1.5" fill="none"/>
-  </svg>
+  <!-- Progress Bar -->
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
 
-  <div class="header-inner">
-    <p class="brand-tag">Agensia × Projekt Briefing</p>
-    <h1>Lass uns deine <em>Website</em><br>zum Leben erwecken.</h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-tag">Agensia × Projekt Briefing</div>
+    <h1>Lass uns deine <em>Website</em> zum Leben erwecken</h1>
     <p>Beantworte ein paar Fragen, damit ich dein Projekt verstehe und ein Angebot erstellen kann, das wirklich zu dir passt. Dauert etwa 5–8 Minuten.</p>
-  </div>
-</header>
+  </header>
 
-<!-- PROGRESS -->
-<div class="progress-bar">
-  <div class="progress-fill" id="progressFill"></div>
-</div>
+  <!-- Form -->
+  <main class="container">
+    <form id="briefingForm" novalidate>
 
-<!-- MAIN -->
-<main>
-  <form id="briefingForm">
+      <!-- ═══════ STEP 1 ═══════ -->
+      <div class="step active" data-step="1">
+        <div class="step-tag">Schritt 1</div>
+        <h2>Wer bist du?</h2>
+        <p class="step-subtitle">Stell dich kurz vor, damit ich weiß, mit wem ich es zu tun habe.</p>
 
-    <!-- STEP 1: Basics -->
-    <div class="step active" data-step="1">
-      <p class="step-number">Schritt 1 von 5</p>
-      <h2 class="step-title">Wer bist du?</h2>
-      <p class="step-subtitle">Stell dich kurz vor, damit ich weiß, mit wem ich es zu tun habe.</p>
-
-      <div class="field">
-        <label>Dein Name</label>
-        <input type="text" placeholder="z. B. Maria Huber" name="name">
-      </div>
-
-      <div class="field">
-        <label>Name deines Unternehmens / Projekts</label>
-        <input type="text" placeholder="z. B. Moosbild Atelier" name="business_name">
-      </div>
-
-      <div class="field">
-        <label>E-Mail-Adresse <span>für Rückfragen</span></label>
-        <input type="email" placeholder="deine@email.de" name="email">
-      </div>
-
-      <div class="field">
-        <label>Was machst du genau? <span>kurz & in eigenen Worten</span></label>
-        <textarea placeholder="z. B. Ich gestalte handgemachte Moosbilder für Innenräume – von kleinen Wanddekorationen bis zu großen Raumteilern für Büros und Restaurants. Jedes Stück ist ein Unikat." name="description"></textarea>
-      </div>
-
-      <div class="form-nav">
-        <span></span>
-        <div style="display:flex;align-items:center;gap:20px;">
-          <span class="step-indicator">1 / 5</span>
-          <button type="button" class="btn btn-primary" onclick="nextStep()">Weiter →</button>
+        <div class="field-group">
+          <label for="name">Dein Name</label>
+          <input type="text" id="name" name="name" placeholder="z.B. Anna Müller" required />
         </div>
-      </div>
-    </div>
 
-    <!-- STEP 2: Zielgruppe & Angebot -->
-    <div class="step" data-step="2">
-      <p class="step-number">Schritt 2 von 5</p>
-      <h2 class="step-title">Deine Kunden & dein Angebot</h2>
-      <p class="step-subtitle">Wer soll die Website ansprechen, und was bietest du an?</p>
+        <div class="field-group">
+          <label for="company">Name deines Unternehmens / Projekts</label>
+          <input type="text" id="company" name="company" placeholder="z.B. Moosatelier Naturkunst" required />
+        </div>
 
-      <div class="field">
-        <label>Wen möchtest du mit deiner Website hauptsächlich erreichen?</label>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="target" value="privat"> <span class="chip-label">🏠 Privatkunden (Zuhause)</span></label>
-          <label class="chip"><input type="checkbox" name="target" value="geschenk"> <span class="chip-label">🎁 Geschenkkäufer</span></label>
-          <label class="chip"><input type="checkbox" name="target" value="interior"> <span class="chip-label">🛋 Interior-Fans</span></label>
-          <label class="chip"><input type="checkbox" name="target" value="bueros"> <span class="chip-label">🏢 Büros & Unternehmen</span></label>
-          <label class="chip"><input type="checkbox" name="target" value="gastronomie"> <span class="chip-label">🍽 Gastronomie & Hotels</span></label>
-          <label class="chip"><input type="checkbox" name="target" value="architekten"> <span class="chip-label">📐 Architekten & Planer</span></label>
+        <div class="field-group">
+          <label for="email">E-Mail-Adresse für Rückfragen</label>
+          <input type="email" id="email" name="email" placeholder="anna@beispiel.de" required />
+        </div>
+
+        <div class="field-group">
+          <label for="description">Was machst du genau? kurz & in eigenen Worten</label>
+          <textarea id="description" name="description" placeholder="Erzähl kurz, was du anbietest und was dein Projekt besonders macht…"></textarea>
+        </div>
+
+        <div class="nav">
+          <span class="nav-progress">1 / 5</span>
+          <button type="button" class="btn btn-primary" onclick="goToStep(2)">Weiter →</button>
         </div>
       </div>
 
-      <div class="field">
-        <label>Was bietest du an? <span>alles was zutrifft</span></label>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="products" value="standard"> <span class="chip-label">Standardformate (Shop)</span></label>
-          <label class="chip"><input type="checkbox" name="products" value="custom"> <span class="chip-label">Individuelle Aufträge</span></label>
-          <label class="chip"><input type="checkbox" name="products" value="corporate"> <span class="chip-label">Corporate / Großaufträge</span></label>
-          <label class="chip"><input type="checkbox" name="products" value="workshops"> <span class="chip-label">Workshops & Kurse</span></label>
-          <label class="chip"><input type="checkbox" name="products" value="beratung"> <span class="chip-label">Beratung / Styling</span></label>
+      <!-- ═══════ STEP 2 ═══════ -->
+      <div class="step" data-step="2">
+        <div class="step-tag">Schritt 2</div>
+        <h2>Deine Kunden & dein Angebot</h2>
+        <p class="step-subtitle">Wer soll die Website ansprechen, und was bietest du an?</p>
+
+        <div class="chips-label">Zielgruppe (mehrere möglich)</div>
+        <div class="chips" data-group="audience">
+          <span class="chip" data-value="Privatkunden">🏠 Privatkunden (Zuhause)</span>
+          <span class="chip" data-value="Geschenkkäufer">🎁 Geschenkkäufer</span>
+          <span class="chip" data-value="Interior-Fans">🛋 Interior-Fans</span>
+          <span class="chip" data-value="Büros & Unternehmen">🏢 Büros & Unternehmen</span>
+          <span class="chip" data-value="Gastronomie & Hotels">🍽 Gastronomie & Hotels</span>
+          <span class="chip" data-value="Architekten & Planer">📐 Architekten & Planer</span>
+        </div>
+
+        <div class="chips-label">Produkte / Dienstleistungen</div>
+        <div class="chips" data-group="products">
+          <span class="chip" data-value="Standardformate (Shop)">Standardformate (Shop)</span>
+          <span class="chip" data-value="Individuelle Aufträge">Individuelle Aufträge</span>
+          <span class="chip" data-value="Corporate / Großaufträge">Corporate / Großaufträge</span>
+          <span class="chip" data-value="Workshops & Kurse">Workshops & Kurse</span>
+          <span class="chip" data-value="Beratung / Styling">Beratung / Styling</span>
+        </div>
+
+        <div class="field-group">
+          <label for="priceSegment">In welchem Preissegment bewegst du dich?</label>
+          <select id="priceSegment" name="priceSegment">
+            <option value="" disabled selected>Bitte wählen…</option>
+            <option value="Unter €100">Unter €100 – Einstiegsprodukte & Geschenke</option>
+            <option value="€100–500">€100–500 – Hochwertige Einzelstücke</option>
+            <option value="€500–2.000">€500–2.000 – Premium & Maßanfertigungen</option>
+            <option value="€2.000+">€2.000+ – Großformate & Corporate</option>
+            <option value="Gemischt">Gemischt – mehrere Segmente</option>
+          </select>
+        </div>
+
+        <div class="nav">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(1)">← Zurück</button>
+          <span class="nav-progress">2 / 5</span>
+          <button type="button" class="btn btn-primary" onclick="goToStep(3)">Weiter →</button>
         </div>
       </div>
 
-      <div class="field">
-        <label>In welchem Preissegment bewegst du dich?</label>
-        <select name="price_range">
-          <option value="">Bitte auswählen …</option>
-          <option value="entry">Unter €100 – Einstiegsprodukte & Geschenke</option>
-          <option value="mid">€100–500 – Hochwertige Einzelstücke</option>
-          <option value="premium">€500–2.000 – Premium & Maßanfertigungen</option>
-          <option value="corporate">€2.000+ – Großformate & Corporate</option>
-          <option value="mix">Gemischt – mehrere Segmente</option>
-        </select>
-      </div>
+      <!-- ═══════ STEP 3 ═══════ -->
+      <div class="step" data-step="3">
+        <div class="step-tag">Schritt 3</div>
+        <h2>Stil & <em>Feeling</em></h2>
+        <p class="step-subtitle">Wie soll sich deine Website anfühlen?</p>
 
-      <div class="form-nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Zurück</button>
-        <div style="display:flex;align-items:center;gap:20px;">
-          <span class="step-indicator">2 / 5</span>
-          <button type="button" class="btn btn-primary" onclick="nextStep()">Weiter →</button>
+        <div class="rec-box">
+          Für Moosbilder eignen sich warme Naturtöne besonders gut: tiefes Moosgrün, Sandbeige und ein Hauch Terrakotta.
         </div>
-      </div>
-    </div>
 
-    <!-- STEP 3: Stil & Ästhetik -->
-    <div class="step" data-step="3">
-      <p class="step-number">Schritt 3 von 5</p>
-      <h2 class="step-title">Stil & <em style="font-family:'Cormorant Garamond',serif;">Feeling</em></h2>
-      <p class="step-subtitle">Wie soll sich deine Website anfühlen? Das beeinflusst Farben, Typografie und Layout.</p>
-
-      <div class="hint-box">
-        <strong>Meine Empfehlung</strong>
-        Für Moosbilder eignen sich warme Naturtöne besonders gut: tiefes Moosgrün, Sandbeige und ein Hauch Terrakotta. Wähle unten, welche Richtung dich am meisten anspricht – ich passe das dann fein an.
-      </div>
-
-      <div class="field">
-        <label>Welche Farbwelt spricht dich am meisten an?</label>
-        <div class="style-cards">
-          <label class="style-card">
-            <input type="radio" name="color_style" value="earthy">
-            <div class="style-card-inner">
-              <div class="style-swatch earthy"></div>
-              <div class="style-card-text">
-                <strong>Earthy & Warm</strong>
-                <small>Terrakotta, Sand, tiefes Moosgrün – wohnlich & einladend</small>
-              </div>
+        <div class="chips-label">Wähle einen Stil</div>
+        <div class="style-cards" data-group="style">
+          <div class="style-card" data-value="Earthy & Warm">
+            <div class="swatches">
+              <div class="swatch" style="background: #c8a878;"></div>
+              <div class="swatch" style="background: #c07848;"></div>
+              <div class="swatch" style="background: #2e4a33;"></div>
             </div>
-          </label>
-          <label class="style-card">
-            <input type="radio" name="color_style" value="editorial">
-            <div class="style-card-inner">
-              <div class="style-swatch editorial"></div>
-              <div class="style-card-text">
-                <strong>Editorial & Cool</strong>
-                <small>Slate, Moosgrün, Offwhite – modern & galerieartig</small>
-              </div>
+            <h4>Earthy & Warm</h4>
+            <p>Terrakotta, Sand, tiefes Moosgrün – wohnlich & einladend</p>
+          </div>
+          <div class="style-card" data-value="Editorial & Cool">
+            <div class="swatches">
+              <div class="swatch" style="background: #4a5a4a;"></div>
+              <div class="swatch" style="background: #2e3e2e;"></div>
+              <div class="swatch" style="background: #111714;"></div>
             </div>
-          </label>
-          <label class="style-card">
-            <input type="radio" name="color_style" value="botanical">
-            <div class="style-card-inner">
-              <div class="style-swatch botanical"></div>
-              <div class="style-card-text">
-                <strong>Botanical & Soft</strong>
-                <small>Pastellgrün, Crème, zarte Akzente – frisch & leicht</small>
-              </div>
+            <h4>Editorial & Cool</h4>
+            <p>Slate, Moosgrün, Offwhite – modern & galerieartig</p>
+          </div>
+          <div class="style-card" data-value="Botanical & Soft">
+            <div class="swatches">
+              <div class="swatch" style="background: #4a7c52;"></div>
+              <div class="swatch" style="background: #2e5035;"></div>
+              <div class="swatch" style="background: #8fba8f;"></div>
             </div>
-          </label>
-          <label class="style-card">
-            <input type="radio" name="color_style" value="modern">
-            <div class="style-card-inner">
-              <div class="style-swatch modern"></div>
-              <div class="style-card-text">
-                <strong>Modern & Refined</strong>
-                <small>Crème, Gold-Sand, Dunkelgrün – premium & zeitlos</small>
-              </div>
+            <h4>Botanical & Soft</h4>
+            <p>Pastellgrün, Crème, zarte Akzente – frisch & leicht</p>
+          </div>
+          <div class="style-card" data-value="Modern & Refined">
+            <div class="swatches">
+              <div class="swatch" style="background: #f0ebe0;"></div>
+              <div class="swatch" style="background: #c8a878;"></div>
+              <div class="swatch" style="background: #2e4a33;"></div>
             </div>
-          </label>
+            <h4>Modern & Refined</h4>
+            <p>Crème, Gold-Sand, Dunkelgrün – premium & zeitlos</p>
+          </div>
+        </div>
+
+        <div class="chips-label">Tonalität (mehrere möglich)</div>
+        <div class="chips" data-group="tone">
+          <span class="chip" data-value="Warm & persönlich">Warm & persönlich</span>
+          <span class="chip" data-value="Clean & professionell">Clean & professionell</span>
+          <span class="chip" data-value="Handgemacht & authentisch">Handgemacht & authentisch</span>
+          <span class="chip" data-value="Hochwertig & exklusiv">Hochwertig & exklusiv</span>
+          <span class="chip" data-value="Naturnah & nachhaltig">Naturnah & nachhaltig</span>
+          <span class="chip" data-value="Verspielt & kreativ">Verspielt & kreativ</span>
+        </div>
+
+        <div class="field-group">
+          <label for="referenceWebsites">Gibt es Websites, die dir gefallen? (optional)</label>
+          <textarea id="referenceWebsites" name="referenceWebsites" placeholder="Links oder Beschreibungen von Websites, deren Stil dir gefällt…"></textarea>
+        </div>
+
+        <div class="nav">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(2)">← Zurück</button>
+          <span class="nav-progress">3 / 5</span>
+          <button type="button" class="btn btn-primary" onclick="goToStep(4)">Weiter →</button>
         </div>
       </div>
 
-      <div class="field">
-        <label>Welche Tonalität soll deine Website vermitteln?</label>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="tone" value="warm"> <span class="chip-label">Warm & persönlich</span></label>
-          <label class="chip"><input type="checkbox" name="tone" value="clean"> <span class="chip-label">Clean & professionell</span></label>
-          <label class="chip"><input type="checkbox" name="tone" value="handmade"> <span class="chip-label">Handgemacht & authentisch</span></label>
-          <label class="chip"><input type="checkbox" name="tone" value="luxury"> <span class="chip-label">Hochwertig & exklusiv</span></label>
-          <label class="chip"><input type="checkbox" name="tone" value="nature"> <span class="chip-label">Naturnah & nachhaltig</span></label>
-          <label class="chip"><input type="checkbox" name="tone" value="playful"> <span class="chip-label">Verspielt & kreativ</span></label>
+      <!-- ═══════ STEP 4 ═══════ -->
+      <div class="step" data-step="4">
+        <div class="step-tag">Schritt 4</div>
+        <h2>Was soll deine Website <em>leisten</em>?</h2>
+        <p class="step-subtitle">Funktionen und Ziele bestimmen den Aufbau.</p>
+
+        <div class="field-group">
+          <label for="mainGoal">Hauptziel der Website</label>
+          <select id="mainGoal" name="mainGoal">
+            <option value="" disabled selected>Bitte wählen…</option>
+            <option value="Schaufenster">Schaufenster – meine Arbeit zeigen & Anfragen generieren</option>
+            <option value="Online-Shop">Online-Shop – direkt verkaufen</option>
+            <option value="Beides">Beides – Galerie + Shop</option>
+            <option value="Kontakt & Anfragen">Hauptsächlich Kontakt & Anfragen</option>
+            <option value="Brand Building">Brand Building – Marke aufbauen, noch kein Verkauf</option>
+          </select>
+        </div>
+
+        <div class="chips-label">Gewünschte Features (mehrere möglich)</div>
+        <div class="chips" data-group="features">
+          <span class="chip" data-value="Galerie / Portfolio">📷 Galerie / Portfolio</span>
+          <span class="chip" data-value="Online-Shop">🛒 Online-Shop</span>
+          <span class="chip" data-value="Kontaktformular">📬 Kontaktformular</span>
+          <span class="chip" data-value="Anfrage-Konfigurator">🎨 Anfrage-Konfigurator</span>
+          <span class="chip" data-value="Blog / Storys">✍️ Blog / Storys</span>
+          <span class="chip" data-value="Instagram-Feed">📱 Instagram-Feed</span>
+          <span class="chip" data-value="FAQ-Bereich">❓ FAQ-Bereich</span>
+          <span class="chip" data-value="Über-mich-Seite">🌿 Über-mich-Seite</span>
+        </div>
+
+        <div class="field-group">
+          <label for="socialMedia">Hast du bereits Social Media Profile? (optional)</label>
+          <textarea id="socialMedia" name="socialMedia" placeholder="z.B. Instagram @mooskunst, Pinterest, Facebook…"></textarea>
+        </div>
+
+        <div class="nav">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(3)">← Zurück</button>
+          <span class="nav-progress">4 / 5</span>
+          <button type="button" class="btn btn-primary" onclick="goToStep(5)">Weiter →</button>
         </div>
       </div>
 
-      <div class="field">
-        <label>Gibt es Websites, die dir gefallen? <span>optional – Links oder Namen</span></label>
-        <textarea placeholder="z. B. moss.love, urbangreens.de – mir gefällt der ruhige, cleane Look und die großen Produktfotos …" name="inspiration"></textarea>
+      <!-- ═══════ STEP 5 ═══════ -->
+      <div class="step" data-step="5">
+        <div class="step-tag">Schritt 5</div>
+        <h2>Materialien & <em>Timing</em></h2>
+        <p class="step-subtitle">Was ist schon vorhanden, und wann soll es losgehen?</p>
+
+        <div class="chips-label">Was hast du bereits?</div>
+        <div class="chips" data-group="assets">
+          <span class="chip" data-value="Logo vorhanden">✅ Logo vorhanden</span>
+          <span class="chip" data-value="Professionelle Fotos">📸 Professionelle Fotos</span>
+          <span class="chip" data-value="Texte fertig">✍️ Texte fertig</span>
+          <span class="chip" data-value="Domain vorhanden">🌐 Domain vorhanden</span>
+          <span class="chip" data-value="Branding / CI vorhanden">🎨 Branding / CI vorhanden</span>
+          <span class="chip" data-value="Noch nichts – Neustart">🌱 Noch nichts – Neustart</span>
+        </div>
+
+        <div class="field-group">
+          <label for="timeline">Bis wann sollte die Website live sein?</label>
+          <select id="timeline" name="timeline">
+            <option value="" disabled selected>Bitte wählen…</option>
+            <option value="Unter 2 Wochen">So schnell wie möglich – unter 2 Wochen</option>
+            <option value="Innerhalb eines Monats">Innerhalb eines Monats</option>
+            <option value="1–2 Monate">1–2 Monate</option>
+            <option value="Flexibel">Flexibel – lieber perfekt als schnell</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="budget">Budget-Vorstellung</label>
+          <select id="budget" name="budget">
+            <option value="" disabled selected>Bitte wählen…</option>
+            <option value="Basis ab €499">Basis-Website ab €499 + monatliches Hosting</option>
+            <option value="Pro €799–1.200">Pro-Website €799–1.200 + Hosting</option>
+            <option value="Premium ab €1.500">Premium mit Shop & Custom-Features ab €1.500</option>
+            <option value="Noch keine Vorstellung">Noch keine Vorstellung – bitte beraten</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="notes">Noch etwas Wichtiges?</label>
+          <textarea id="notes" name="notes" placeholder="Besondere Wünsche, Deadlines, wichtige Details…"></textarea>
+        </div>
+
+        <div class="nav">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(4)">← Zurück</button>
+          <span class="nav-progress">5 / 5</span>
+          <button type="button" class="btn btn-submit" onclick="submitForm()">Absenden 🌿</button>
+        </div>
+
+        <div class="form-status" id="formStatus"></div>
       </div>
 
-      <div class="form-nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Zurück</button>
-        <div style="display:flex;align-items:center;gap:20px;">
-          <span class="step-indicator">3 / 5</span>
-          <button type="button" class="btn btn-primary" onclick="nextStep()">Weiter →</button>
-        </div>
-      </div>
+    </form>
+
+    <!-- Success Screen -->
+    <div class="success-screen" id="successScreen">
+      <h2>Vielen Dank! 🌿</h2>
+      <p>Dein Briefing ist bei mir angekommen. Ich schaue es mir genau an und melde mich innerhalb von 24 Stunden mit einem konkreten Angebot und ersten Ideen.</p>
+      <div class="signature">— Agensia Webdesign</div>
     </div>
+  </main>
 
-    <!-- STEP 4: Ziele & Funktionen -->
-    <div class="step" data-step="4">
-      <p class="step-number">Schritt 4 von 5</p>
-      <h2 class="step-title">Was soll deine Website <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--moss-pale);">leisten</em>?</h2>
-      <p class="step-subtitle">Funktionen und Ziele bestimmen den Aufbau.</p>
+  <footer class="footer">
+    Agensia Webdesign
+  </footer>
 
-      <div class="field">
-        <label>Hauptziel der Website</label>
-        <select name="goal">
-          <option value="">Bitte auswählen …</option>
-          <option value="showcase">Schaufenster – meine Arbeit zeigen & Anfragen generieren</option>
-          <option value="shop">Online-Shop – direkt verkaufen</option>
-          <option value="both">Beides – Galerie + Shop</option>
-          <option value="contact">Hauptsächlich Kontakt & Anfragen</option>
-          <option value="brand">Brand Building – Marke aufbauen, noch kein Verkauf</option>
-        </select>
-      </div>
+  <script>
+    // ── State ──
+    let currentStep = 1;
+    const totalSteps = 5;
+    const chipSelections = {
+      audience: [],
+      products: [],
+      tone: [],
+      features: [],
+      assets: []
+    };
+    let selectedStyle = '';
 
-      <div class="field">
-        <label>Welche Funktionen brauchst du? <span>alles was zutrifft</span></label>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="features" value="gallery"> <span class="chip-label">📷 Galerie / Portfolio</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="shop"> <span class="chip-label">🛒 Online-Shop</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="contact"> <span class="chip-label">📬 Kontaktformular</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="custom_request"> <span class="chip-label">🎨 Anfrage-Konfigurator</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="blog"> <span class="chip-label">✍️ Blog / Storys</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="instagram"> <span class="chip-label">📱 Instagram-Feed</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="faq"> <span class="chip-label">❓ FAQ-Bereich</span></label>
-          <label class="chip"><input type="checkbox" name="features" value="about"> <span class="chip-label">🌿 Über-mich-Seite</span></label>
-        </div>
-      </div>
+    // ── Progress Bar ──
+    function updateProgress() {
+      const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+    }
 
-      <div class="field">
-        <label>Hast du bereits Social Media Profile? <span>optional</span></label>
-        <input type="text" placeholder="z. B. @moosbild.atelier auf Instagram" name="social_media">
-      </div>
+    // ── Step Navigation ──
+    function goToStep(step) {
+      // Basic validation for step 1
+      if (currentStep === 1 && step > 1) {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        if (!name || !email) {
+          alert('Bitte fülle mindestens deinen Namen und deine E-Mail aus.');
+          return;
+        }
+        if (!isValidEmail(email)) {
+          alert('Bitte gib eine gültige E-Mail-Adresse ein.');
+          return;
+        }
+      }
 
-      <div class="form-nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Zurück</button>
-        <div style="display:flex;align-items:center;gap:20px;">
-          <span class="step-indicator">4 / 5</span>
-          <button type="button" class="btn btn-primary" onclick="nextStep()">Weiter →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 5: Materialien & Timeline -->
-    <div class="step" data-step="5">
-      <p class="step-number">Schritt 5 von 5</p>
-      <h2 class="step-title">Materialien & Timing</h2>
-      <p class="step-subtitle">Was ist schon vorhanden, und wann soll es losgehen?</p>
-
-      <div class="field">
-        <label>Was hast du bereits? <span>alles was zutrifft</span></label>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="assets" value="logo"> <span class="chip-label">✅ Logo vorhanden</span></label>
-          <label class="chip"><input type="checkbox" name="assets" value="photos"> <span class="chip-label">📸 Professionelle Fotos</span></label>
-          <label class="chip"><input type="checkbox" name="assets" value="texts"> <span class="chip-label">✍️ Texte fertig</span></label>
-          <label class="chip"><input type="checkbox" name="assets" value="domain"> <span class="chip-label">🌐 Domain vorhanden</span></label>
-          <label class="chip"><input type="checkbox" name="assets" value="brand"> <span class="chip-label">🎨 Branding / CI vorhanden</span></label>
-          <label class="chip"><input type="checkbox" name="assets" value="nothing"> <span class="chip-label">🌱 Noch nichts – Neustart</span></label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Bis wann sollte die Website live sein?</label>
-        <select name="timeline">
-          <option value="">Bitte auswählen …</option>
-          <option value="asap">So schnell wie möglich – unter 2 Wochen</option>
-          <option value="month">Innerhalb eines Monats</option>
-          <option value="two_months">1–2 Monate</option>
-          <option value="flexible">Flexibel – lieber perfekt als schnell</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Budget-Vorstellung <span>damit ich dir das richtige Paket zeigen kann</span></label>
-        <select name="budget">
-          <option value="">Bitte auswählen …</option>
-          <option value="basic">Basis-Website ab €499 + monatliches Hosting</option>
-          <option value="pro">Pro-Website €799–1.200 + Hosting</option>
-          <option value="premium">Premium mit Shop & Custom-Features ab €1.500</option>
-          <option value="unknown">Noch keine Vorstellung – bitte beraten</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Noch etwas Wichtiges? <span>Wünsche, Besonderheiten, offene Fragen</span></label>
-        <textarea placeholder="z. B. Ich möchte unbedingt, dass man Moosbilder auch konfigurieren kann (Größe, Rahmen, Moos-Art). Außerdem bin ich eco-bewusst und das soll auf der Website spürbar sein …" name="extra"></textarea>
-      </div>
-
-      <div class="form-nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Zurück</button>
-        <div style="display:flex;align-items:center;gap:20px;">
-          <span class="step-indicator">5 / 5</span>
-          <button type="button" class="btn btn-primary" onclick="submitForm()" style="background:var(--terracotta);">Absenden 🌿</button>
-        </div>
-      </div>
-    </div>
-
-  </form>
-
-  <!-- SUCCESS -->
-  <div class="success-screen" id="successScreen">
-    <div class="success-icon">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FAF7F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12"/>
-      </svg>
-    </div>
-    <h2>Vielen Dank! 🌿</h2>
-    <p>Dein Briefing ist bei mir angekommen. Ich schaue es mir genau an und melde mich innerhalb von 24 Stunden mit einem konkreten Angebot und ersten Ideen.</p>
-    <p style="margin-top:20px;font-size:13px;color:var(--text-subtle);">— Agensia Webdesign</p>
-  </div>
-</main>
-
-<footer>
-  Agensia Webdesign &nbsp;·&nbsp; Projekt-Briefing
-</footer>
-
-<script>
-  let currentStep = 1;
-  const totalSteps = 5;
-
-  function updateProgress() {
-    const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
-    document.getElementById('progressFill').style.width = pct + '%';
-  }
-
-  function showStep(n) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    const el = document.querySelector(`[data-step="${n}"]`);
-    if (el) { el.classList.add('active'); window.scrollTo({top: 0, behavior:'smooth'}); }
-    updateProgress();
-  }
-
-  function nextStep() {
-    if (currentStep < totalSteps) { currentStep++; showStep(currentStep); }
-  }
-
-  function prevStep() {
-    if (currentStep > 1) { currentStep--; showStep(currentStep); }
-  }
-
-  function submitForm() {
-    // Collect form data
-    const formData = new FormData(document.getElementById('briefingForm'));
-    const data = {};
-    for (const [key, value] of formData.entries()) {
-      if (data[key]) {
-        data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
-      } else {
-        data[key] = value;
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`.step[data-step="${step}"]`);
+      if (target) {
+        target.classList.remove('active');
+        // Re-trigger animation
+        void target.offsetWidth;
+        target.classList.add('active');
+        currentStep = step;
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
-    console.log('Briefing Data:', data);
 
-    // Show success
-    document.getElementById('briefingForm').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'block';
-    document.getElementById('progressFill').style.width = '100%';
-    window.scrollTo({top: 0, behavior:'smooth'});
-  }
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
 
-  updateProgress();
-</script>
+    // ── Chip Selection ──
+    document.querySelectorAll('.chips .chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        const group = this.parentElement.dataset.group;
+        const value = this.dataset.value;
+
+        if (this.classList.contains('selected')) {
+          this.classList.remove('selected');
+          chipSelections[group] = chipSelections[group].filter(v => v !== value);
+        } else {
+          this.classList.add('selected');
+          chipSelections[group].push(value);
+        }
+      });
+    });
+
+    // ── Style Card Selection ──
+    document.querySelectorAll('.style-card').forEach(card => {
+      card.addEventListener('click', function () {
+        document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedStyle = this.dataset.value;
+      });
+    });
+
+    // ── Form Submission ──
+    async function submitForm() {
+      const statusEl = document.getElementById('formStatus');
+
+      // Collect all data
+      const formData = {
+        // Step 1
+        name: document.getElementById('name').value.trim(),
+        company: document.getElementById('company').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        description: document.getElementById('description').value.trim(),
+
+        // Step 2
+        audience: chipSelections.audience,
+        products: chipSelections.products,
+        priceSegment: document.getElementById('priceSegment').value,
+
+        // Step 3
+        style: selectedStyle,
+        tone: chipSelections.tone,
+        referenceWebsites: document.getElementById('referenceWebsites').value.trim(),
+
+        // Step 4
+        mainGoal: document.getElementById('mainGoal').value,
+        features: chipSelections.features,
+        socialMedia: document.getElementById('socialMedia').value.trim(),
+
+        // Step 5
+        assets: chipSelections.assets,
+        timeline: document.getElementById('timeline').value,
+        budget: document.getElementById('budget').value,
+        notes: document.getElementById('notes').value.trim()
+      };
+
+      // Show sending state
+      statusEl.className = 'form-status sending';
+      statusEl.textContent = 'Wird gesendet…';
+      statusEl.style.display = 'block';
+
+      try {
+        // ── Send via Formspree ──
+        const response = await fetch('https://formspree.io/f/mqedldrw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `Neues Projekt-Briefing von ${formData.name}`,
+            name: formData.name,
+            company: formData.company,
+            email: formData.email,
+            description: formData.description,
+            audience: formData.audience.join(', '),
+            products: formData.products.join(', '),
+            priceSegment: formData.priceSegment,
+            style: formData.style,
+            tone: formData.tone.join(', '),
+            referenceWebsites: formData.referenceWebsites,
+            mainGoal: formData.mainGoal,
+            features: formData.features.join(', '),
+            socialMedia: formData.socialMedia,
+            assets: formData.assets.join(', '),
+            timeline: formData.timeline,
+            budget: formData.budget,
+            notes: formData.notes
+          })
+        });
+
+        if (response.ok) {
+          // Success
+          document.getElementById('briefingForm').style.display = 'none';
+          document.getElementById('successScreen').classList.add('active');
+          document.getElementById('progressBar').style.width = '100%';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib mir direkt eine E-Mail.';
+      }
+    }
+
+    // ── Init ──
+    updateProgress();
+  </script>
 </body>
 </html>
